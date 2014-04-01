@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration>
+    <!--аппендер для консольки-->
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Threshold" value="all"/>
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p -%m%n"/>
+        </layout>
+    </appender>
+
+    <!--определим аппендер, который будет писать в файл только параметры запросов-->
+    <appender name="HibernateTypeAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}\\webapps\\TestManager3_logs\\hibernate.log"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="4"/>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="trace"/>
+            <param name="levelMax" value="trace"/>
+        </filter>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p -%m%n"/>
+        </layout>
+    </appender>
+
+    <!--определим аппендер, который будет писать в файл только запросы-->
+    <appender name="HibernateSQLAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}\\webapps\\TestManager3_logs\\hibernate.log"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="4"/>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="levelMin" value="debug"/>
+            <param name="levelMax" value="debug"/>
+        </filter>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p -%m%n"/>
+        </layout>
+    </appender>
+
+    <!--аппендер для записи данных кли-->
+    <appender name="LaunchInfo" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}\\webapps\\TestManager3_logs\\LaunchInfo.log"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="4"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p -%m%n"/>
+        </layout>
+    </appender>
+
+    <!--аппендер пишущий работу конекшенн пула бд-->
+    <appender name="c3p0Appender" class="org.apache.log4j.RollingFileAppender">
+        <param name="file"
+               value="${catalina.home}\\webapps\\TestManager3_logs\\c3po-dbconnectionPool.log"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="4"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p -%m%n"/>
+        </layout>
+    </appender>
+
+    <!--аппендер пишущий работу сервлета AddLaunch-->
+    <appender name="Launches" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}\\webapps\\TestManager3_logs\\Launches.log"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="4"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p -%m%n"/>
+        </layout>
+    </appender>
+
+    <!--аппендер пишущий работу сервлета AddLaunch-->
+    <appender name="Tests" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}\\webapps\\TestManager3_logs\\Tests.log"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="4"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p -%m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="ProcessPool" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}\\webapps\\TestManager3_logs\\ProcessPool.log"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="4"/>
+        <param name="immediateFlush" value="true"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p -%m%n"/>
+        </layout>
+    </appender>
+
+
+    <appender name="DAOAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}\\webapps\\TestManager3_logs\\DAO.log"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="4"/>
+        <param name="immediateFlush" value="true"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p [thread: %t] [log caller: %I] -%m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="ServicesAppender" class="org.apache.log4j.RollingFileAppender">
+        <param name="file" value="${catalina.home}\\webapps\\TestManager3_logs\\Services.log"/>
+        <param name="MaxFileSize" value="1MB"/>
+        <!-- Keep one backup file -->
+        <param name="MaxBackupIndex" value="4"/>
+        <param name="immediateFlush" value="true"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%-5p [thread: %t] [log caller: %I] -%m%n"/>
+        </layout>
+    </appender>
+
+
+    <logger name="org.hibernate.SQL" additivity="true">
+        <level value="off"/>
+        <appender-ref ref="HibernateSQLAppender"/>
+    </logger>
+
+    <logger name="org.hibernate.type" additivity="true">
+        <level value="off"/>
+        <appender-ref ref="HibernateTypeAppender"/>
+    </logger>
+
+
+    <logger name="com.mchange.v2.c3p0" additivity="false">
+        <level value="off"/>
+        <appender-ref ref="c3p0Appender"/>
+    </logger>
+
+    <logger name="LaunchInfoServ">
+        <level value="off"/>
+        <appender-ref ref="LaunchInfo"/>
+    </logger>
+
+    <logger name="LaunchesServ">
+        <level value="off"/>
+        <appender-ref ref="Launches"/>
+    </logger>
+
+    <logger name="TestsServ">
+        <level value="off"/>
+        <appender-ref ref="Tests"/>
+    </logger>
+
+    <logger name="ProcessPool" additivity="true">
+        <level value="off"/>
+        <appender-ref ref="ProcessPool"/>
+    </logger>
+
+    <logger name="DAO" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="DAOAppender"/>
+    </logger>
+
+    <logger name="Services" additivity="false">
+        <level value="debug"/>
+        <appender-ref ref="ServicesAppender"/>
+    </logger>
+
+    <root>
+        <priority value="all"/>
+        <appender-ref ref="console"/>
+    </root>
+
+
+</log4j:configuration>

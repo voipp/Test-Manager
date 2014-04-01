@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5"
+        >
+
+    <servlet>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>controller</param-value>
+        </init-param>
+        <init-param>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <context-param>
+        <param-name>maximum processpool size</param-name>
+        <param-value>-1</param-value>
+    </context-param>
+    <context-param>
+        <param-name>core processpool size</param-name>
+        <param-value>1</param-value>
+    </context-param>
+	    <context-param>
+        <param-name>executable jar</param-name>
+        <param-value>D:\\subversion\\mpgu\\Gosuslugi\\runner.jar</param-value>
+    </context-param>
+		    <context-param>
+        <param-name>jar parameters</param-name>
+        <param-value>-testId:1001,-serviceId:1001,-runner:D:\\subversion\\mpgu\\Gosuslugi\\epgu_result\\tests\\Run1.runner.xml</param-value>
+    </context-param>
+			    <context-param>
+        <param-name>working dir</param-name>
+        <param-value>D:\subversion\mpgu\Gosuslugi</param-value>
+    </context-param>
+	
+	
+
+    <listener>
+        <listener-class>controller.Initializer.ContextInitializer</listener-class>
+    </listener>
+
+    <servlet-mapping>
+        <servlet-name>jersey-serlvet</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
+    </servlet-mapping>
+
+    <!--security roles показывают, каким ролям разрешен доступ к приложению-->
+    <security-role>
+        <description>mpgu admin</description>
+        <role-name>mpgu-admin</role-name>
+    </security-role>
+    <security-role>
+        <description>mpgu user</description>
+        <role-name>mpgu-user</role-name>
+    </security-role>
+
+
+    <!--auth-constraint показывают, каким ролям разрешен доступ к данному ресурсу(определнному внутри <web-resource-collection> ) приложения!-->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Only admin pages</web-resource-name>
+            <url-pattern>/SaveTemplate</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>mpgu-admin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>All pages</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>mpgu-admin</role-name>
+            <role-name>mpgu-user</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <form-login-config>
+            <form-login-page>/WEB-INF/login.html</form-login-page>
+            <form-error-page>/WEB-INF/login-failed.html</form-error-page>
+        </form-login-config>
+    </login-config>
+
+    <!--все не артефакты имеют суффик .html, что бы иметь возможность фильтровать запросы-->
+
+    <servlet>
+        <servlet-name>SaveTemplateJSP</servlet-name>
+        <jsp-file>/views/SaveTemplate.jsp</jsp-file>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SaveTemplateJSP</servlet-name>
+        <url-pattern>/SaveTemplate</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>StartPageBackendJSP</servlet-name>
+        <jsp-file>/views/StartPage.jsp</jsp-file>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StartPageBackendJSP</servlet-name>
+        <url-pattern>/StartPage</url-pattern>
+        <url-pattern>/index.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>LaunchInfoBackendJSP</servlet-name>
+        <jsp-file>/views/LaunchInfo.jsp</jsp-file>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LaunchInfoBackendJSP</servlet-name>
+        <url-pattern>/LaunchInfo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>TemplateInfoJSP</servlet-name>
+        <jsp-file>/views/TemplateInfo.jsp</jsp-file>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TemplateInfoJSP</servlet-name>
+        <url-pattern>/TemplateInfo</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AllLaunchesBackendJSP</servlet-name>
+        <jsp-file>/views/AllLaunches.jsp</jsp-file>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AllLaunchesBackendJSP</servlet-name>
+        <url-pattern>/AllLaunches</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>AllTemplatesBackendJSP</servlet-name>
+        <jsp-file>/views/TemplateTable.jsp</jsp-file>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AllTemplatesBackendJSP</servlet-name>
+        <url-pattern>/AllTemplates</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>

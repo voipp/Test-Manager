@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mpguDB:war">
+    <output-path>$PROJECT_DIR$/mpguDB/target</output-path>
+    <root id="archive" name="TestManager3.war">
+      <element id="artifact" artifact-name="mpguDB:war exploded" />
+    </root>
+  </artifact>
+</component>

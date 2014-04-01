@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="ProcessPool:war">
+    <output-path>$PROJECT_DIR$/ProcessPool/target</output-path>
+    <root id="archive" name="TestManager3.war">
+      <element id="artifact" artifact-name="ProcessPool:war exploded" />
+    </root>
+  </artifact>
+</component>

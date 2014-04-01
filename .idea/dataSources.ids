@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?><component name="dataSourceStorage">
+  <data-source source="LOCAL" name="Data Source" product="MySQL" version="5.5.32" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.26 ( Revision: ${bzr.revision-id} )" uuid="15f041a1-904e-4d4a-959b-45740ecb846e">
+    <extra-name-characters>#@</extra-name-characters>
+    <identifier-quote-string>`</identifier-quote-string>
+    <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
+    <jdbc-url>jdbc:mysql://localhost:3306/mpgu_new</jdbc-url>
+    <user-name>root</user-name>
+    <schema-pattern>mpgu_new.*</schema-pattern>
+    <default-schemas>mpgu_new.*</default-schemas>
+    <libraries>
+      <library>
+        <url>jar://$PROJECT_DIR$/mysql-connector-java-5.1.26-bin.jar!/</url>
+      </library>
+      <library>
+        <url>file://$PROJECT_DIR$/mysql-connector-license.txt</url>
+      </library>
+    </libraries>
+    <schema name="" catalog="mpgu_new" />
+    <table name="exit_codes" schema="" catalog="mpgu_new" type="TABLE">
+      <column name="exit_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="description" sqlType="CHAR" length="150" precision="0" nullable="false" jdbcType="1" />
+      <primary-key name="PRIMARY" columns="exit_id" />
+      <exported-key name="launch_history_ibfk_2" table="launch_history" schema="" catalog="mpgu_new" columns="exit_code" />
+    </table>
+    <table name="launch_history" schema="" catalog="mpgu_new" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" autoIncrement="true" />
+      <column name="launch_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="exit_code" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <column name="template_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" />
+      <primary-key name="PRIMARY" columns="id" />
+      <foreign-key name="launch_history_ibfk_1" columns="launch_id" ref-table="launches" ref-schema="" ref-catalog="mpgu_new" ref-columns="launch_id" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="launch_history_ibfk_2" columns="exit_code" ref-table="exit_codes" ref-schema="" ref-catalog="mpgu_new" ref-columns="exit_id" update-rule="0" delete-rule="0" deferrability="2" />
+      <foreign-key name="ololo" columns="template_id" ref-table="templates" ref-schema="" ref-catalog="mpgu_new" ref-columns="temp_id" update-rule="0" delete-rule="0" deferrability="2" />
+      <index name="exit_code_2" unique="false" columns="exit_code" />
+      <index name="launch_id_2" unique="false" columns="launch_id" />
+      <index name="template_id_2" unique="false" columns="template_id" />
+    </table>
+    <table name="launches" schema="" catalog="mpgu_new" type="TABLE">
+      <column name="launch_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0LfQsNC/0LjRgdC4INCyINGC0LDQsdC70LjRhtC1" autoIncrement="true" />
+      <column name="template_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0YjQsNCx0LvQvtC90LA=" />
+      <column name="date_query" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" remarks="0JTQsNGC0LAg0YPRgdGC0LDQvdC+0LLQutC4INCyINC+0YfQtdGA0LXQtNGM" />
+      <column name="date_end" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" remarks="0JTQsNGC0LAg0L7QutC+0L3Rh9Cw0L3QuNGP" />
+      <column name="date_start" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" remarks="0JTQsNGC0LAg0LfQsNC/0YPRgdC60LA=" />
+      <column name="status" sqlType="ENUM" length="8" precision="0" nullable="true" jdbcType="1" def="J3F1ZXJ5Jw==" remarks="0KHRgtCw0YLRg9GBINC30LDQv9GD0YHQutCw" />
+      <primary-key name="PRIMARY" columns="launch_id" />
+      <exported-key name="launch_history_ibfk_1" table="launch_history" schema="" catalog="mpgu_new" columns="launch_id" />
+      <exported-key name="result_ibfk_2" table="result" schema="" catalog="mpgu_new" columns="launch_id" />
+    </table>
+    <table name="params" schema="" catalog="mpgu_new" type="TABLE">
+      <column name="params_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0LfQsNC/0LjRgdC4INCyINGC0LDQsdC70LjRhtC1" autoIncrement="true" />
+      <column name="param_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INC/0LDRgNCw0LzQtdGC0YDQsA==" />
+      <column name="description" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" remarks="0J7Qv9C40YHQsNC90LjQtSDQv9Cw0YDQsNC80LXRgtGA0LA=" />
+      <primary-key name="PRIMARY" columns="params_id" />
+    </table>
+    <table name="params_template" schema="" catalog="mpgu_new" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0LfQsNC/0LjRgdC4INCyINGC0LDQsdC70LjRhtC1" autoIncrement="true" />
+      <column name="params_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0L/QsNGA0LDQvNC10YLRgNCw" />
+      <column name="param_value" sqlType="ENUM" length="5" precision="0" nullable="true" jdbcType="1" remarks="0LfQvdCw0YfQtdC90LjQtSDQv9Cw0YDQsNC80LXRgtGA0LA=" />
+      <column name="template_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0YjQsNCx0LvQvtC90LA=" />
+      <primary-key name="PRIMARY" columns="id" />
+      <index name="params_id" unique="false" columns="params_id" />
+      <index name="template_id" unique="false" columns="template_id" />
+    </table>
+    <table name="result" schema="" catalog="mpgu_new" type="TABLE">
+      <column name="res_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0LfQsNC/0LjRgdC4INCyINGC0LDQsdC70LjRhtC1" autoIncrement="true" />
+      <column name="log_path" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" remarks="0J/Rg9GC0Ywg0LTQviDQt9Cw0L/Rg9GB0LrQsCDRgtC10YHRgtCw" />
+      <column name="template_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" remarks="SWQg0YjQsNCx0LvQvtC90LA=" />
+      <column name="launch_id" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" remarks="SWQg0LfQsNC/0YPRgdC60LA=" />
+      <column name="result" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" remarks="0YDQtdC30YPQu9GM0YLQsNGC" />
+      <column name="invisible_flag" sqlType="INT" length="10" precision="0" nullable="true" jdbcType="4" remarks="0YTQu9Cw0LMg0L3QtdC+0YLQvtCx0YDQsNC20LXQvdC40Y8g0YDQtdC30YPQu9GM0YLQsNGC0LA=" />
+      <primary-key name="PRIMARY" columns="res_id" />
+      <index name="launch_id" unique="true" columns="launch_id" />
+      <index name="template_id" unique="false" columns="template_id,launch_id" />
+    </table>
+    <table name="templates" schema="" catalog="mpgu_new" type="TABLE">
+      <column name="temp_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0LfQsNC/0LjRgdC4INCyINGC0LDQsdC70LjRhtC1" autoIncrement="true" />
+      <column name="template_name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" remarks="0J3QsNC40LzQtdC90L7QstCw0L3QuNC1INGC0LXRgdGC0LjRgNGD0LXQvNC+0Lkg0YPRgdC70YPQs9C4" />
+      <column name="description" sqlType="TEXT" length="65535" precision="0" nullable="true" jdbcType="-1" remarks="0J7Qv9C40YHQsNC90LjQtSDRg9GB0LvRg9Cz0Lg=" />
+      <primary-key name="PRIMARY" columns="temp_id" />
+      <exported-key name="ololo" table="launch_history" schema="" catalog="mpgu_new" columns="template_id" />
+      <exported-key name="result_ibfk_1" table="result" schema="" catalog="mpgu_new" columns="template_id" />
+    </table>
+    <table name="tests" schema="" catalog="mpgu_new" type="TABLE">
+      <column name="test_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0LfQsNC/0LjRgdC4INCyINGC0LDQsdC70LjRhtC1" autoIncrement="true" />
+      <column name="path" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" remarks="0J/Rg9GC0Ywg0LTQviDQt9Cw0L/Rg9GB0LrQsCDRgtC10YHRgtCw" />
+      <column name="name" sqlType="VARCHAR" length="255" precision="0" nullable="true" jdbcType="12" remarks="0J3QsNC30LLQsNC90LjQtSDRgtC10YHRgtCw" />
+      <primary-key name="PRIMARY" columns="test_id" />
+    </table>
+    <table name="tests_to_template" schema="" catalog="mpgu_new" type="TABLE">
+      <column name="id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="SWQg0LfQsNC/0LjRgdC4INCyINGC0LDQsdC70LjRhtC1" autoIncrement="true" />
+      <column name="template_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="aWQg0YjQsNCx0LvQvtC90LA=" />
+      <column name="test_id" sqlType="INT" length="10" precision="0" nullable="false" jdbcType="4" remarks="aWQg0YLQtdGB0YLQsA==" />
+      <primary-key name="PRIMARY" columns="id" />
+    </table>
+  </data-source>
+</component>

@@ -1,0 +1,53 @@
+.ex_highlight  tbody tr.even:hover,  tbody tr.even td.highlighted {
+    background-color: #ECFFB3;
+}
+
+.ex_highlight  tbody tr.odd:hover,  tbody tr.odd td.highlighted {
+    background-color: #E6FF99;
+}
+
+/* style for sorting_1 class element when corresponding row is hovered */
+
+.ex_highlight  tr.even:hover td.sorting_1 {
+    background-color: #DDFF75;
+}
+
+.ex_highlight  tr.odd:hover td.sorting_1 {
+    background-color: #D6FF5C;
+}
+
+/* style for sorting_1 class element when corresponding row is hovered */
+
+
+
+.ex_highlight_row  tr.even:hover {
+    background-color: #ECFFB3;
+}
+
+.ex_highlight_row  tr.even:hover td.sorting_1 {
+    background-color: #DDFF75;
+}
+
+.ex_highlight_row  tr.even:hover td.sorting_2 {
+    background-color: #E7FF9E;
+}
+
+.ex_highlight_row  tr.even:hover td.sorting_3 {
+    background-color: #E2FF89;
+}
+
+.ex_highlight_row  tr.odd:hover {
+    background-color: #E6FF99;
+}
+
+.ex_highlight_row  tr.odd:hover td.sorting_1 {
+    background-color: #D6FF5C;
+}
+
+.ex_highlight_row  tr.odd:hover td.sorting_2 {
+    background-color: #E0FF84;
+}
+
+.ex_highlight_row  tr.odd:hover td.sorting_3 {
+    background-color: #DBFF70;
+}
